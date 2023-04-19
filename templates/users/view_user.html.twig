@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="d-flex justify-content-between">
+			<h1>{{ user.prenom }}</h1>
+			{% if app.user %}
+				<div class="mb-3">{{ app.user.prenom }}</div>
+			{% endif %}
+			<div class="justify-content-around">
+				<a href="{{ path('list_users')}}" class="btn btn-success">Utilisateurs</a>
+				{% if app.user == false %}
+				<a href="{{ path('app_login')}}" class="btn btn-success">Connexion</a>
+				{% endif %}
+				{% if app.user.roles[0] =="ROLE_ADMIN" %}
+				<a href="{{ path('app_register')}}" class="btn btn-success">Créer un utilisateurs</a>
+				{% endif %}
+				<a href="{{ path('app_logout')}}" class="btn btn-danger">déconnecter</a>
+			</div>
+		</div>
+		<div class="row">
+			<ul class="list-group">
+				<li class="list-group-item">{{ user.nom }}</li>
+				<li class="list-group-item">{{ user.prenom }}</li>
+				<li class="list-group-item">{{ user.age }}</li>
+				<li class="list-group-item">{{ user.email }}</li>
+				<li class="list-group-item">{{ user.telephone }}</li>
+                <li class="list-group-item">{{ user.adresse }}</li>
+                <li class="list-group-item">{{ user.cp }}</li>
+                <li class="list-group-item">{{ user.pays }}</li>
+                <li class="list-group-item">{{ user.pdp }}</li>
+			</ul>
+            <a href="{{ path('edit_user',{id_user:user.id}) }}" class="card-link">Modifier</a>
+		</div>
+
+	</div>
+{% endblock %}
